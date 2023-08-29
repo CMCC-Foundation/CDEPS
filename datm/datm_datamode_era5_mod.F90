@@ -24,12 +24,12 @@ module datm_datamode_era5_mod
 
   ! export state data
   real(r8), pointer :: Sa_z(:)              => null()
-  real(r8), pointer :: Sa_u10m(:)           => null()
-  real(r8), pointer :: Sa_v10m(:)           => null()
-  real(r8), pointer :: Sa_wspd10m(:)        => null()
-  real(r8), pointer :: Sa_t2m(:)            => null()
+  real(r8), pointer :: Sa_u(:)           => null()
+  real(r8), pointer :: Sa_v(:)           => null()
+!  real(r8), pointer :: Sa_wind(:)        => null()
+  real(r8), pointer :: Sa_tbot(:)            => null()
   real(r8), pointer :: Sa_tskn(:)           => null()
-  real(r8), pointer :: Sa_q2m(:)            => null()
+  real(r8), pointer :: Sa_shum(:)            => null()
   real(r8), pointer :: Sa_pslv(:)           => null()
   real(r8), pointer :: Faxa_rain(:)         => null()
   real(r8), pointer :: Faxa_rainc(:)        => null()
@@ -53,6 +53,7 @@ module datm_datamode_era5_mod
 
   ! stream data
   real(r8), pointer :: strm_tdew(:)         => null()
+  real(r8), pointer :: strm_wind(:)      => null()
 
   real(r8) :: t2max  ! units detector
   real(r8) :: td2max ! units detector
@@ -87,12 +88,12 @@ contains
 
     call dshr_fldList_add(fldsExport, trim(flds_scalar_name))
     call dshr_fldList_add(fldsExport, 'Sa_z'       )
-    call dshr_fldList_add(fldsExport, 'Sa_u10m'    )
-    call dshr_fldList_add(fldsExport, 'Sa_v10m'    )
-    call dshr_fldList_add(fldsExport, 'Sa_wspd10m' )
-    call dshr_fldList_add(fldsExport, 'Sa_t2m'     )
+    call dshr_fldList_add(fldsExport, 'Sa_u'    )
+    call dshr_fldList_add(fldsExport, 'Sa_v'    )
+!    call dshr_fldList_add(fldsExport, 'Sa_wind' )
+    call dshr_fldList_add(fldsExport, 'Sa_tbot'     )
     call dshr_fldList_add(fldsExport, 'Sa_tskn'    )
-    call dshr_fldList_add(fldsExport, 'Sa_q2m'     )
+    call dshr_fldList_add(fldsExport, 'Sa_shum'     )
     call dshr_fldList_add(fldsExport, 'Sa_pslv'    )
     call dshr_fldList_add(fldsExport, 'Faxa_rain'  )
     call dshr_fldList_add(fldsExport, 'Faxa_rainc' )
@@ -138,22 +139,23 @@ contains
 
     ! initialize pointers for module level stream arrays
     call shr_strdata_get_stream_pointer( sdat, 'Sa_tdew'   , strm_tdew , rc)
+    call shr_strdata_get_stream_pointer( sdat, 'Sa_wind'   , strm_wind , rc)
     if (ChkErr(rc,__LINE__,u_FILE_u)) return
 
     ! get export state pointers
     call dshr_state_getfldptr(exportState, 'Sa_z'       , fldptr1=Sa_z       , allowNullReturn=.true., rc=rc)
     if (ChkErr(rc,__LINE__,u_FILE_u)) return
-    call dshr_state_getfldptr(exportState, 'Sa_u10m'    , fldptr1=Sa_u10m    , allowNullReturn=.true., rc=rc)
+    call dshr_state_getfldptr(exportState, 'Sa_u'    , fldptr1=Sa_u    , allowNullReturn=.true., rc=rc)
     if (ChkErr(rc,__LINE__,u_FILE_u)) return
-    call dshr_state_getfldptr(exportState, 'Sa_v10m'    , fldptr1=Sa_v10m    , allowNullReturn=.true., rc=rc)
+    call dshr_state_getfldptr(exportState, 'Sa_v'    , fldptr1=Sa_v    , allowNullReturn=.true., rc=rc)
     if (ChkErr(rc,__LINE__,u_FILE_u)) return
-    call dshr_state_getfldptr(exportState, 'Sa_wspd10m' , fldptr1=Sa_wspd10m , allowNullReturn=.true., rc=rc)
-    if (ChkErr(rc,__LINE__,u_FILE_u)) return
-    call dshr_state_getfldptr(exportState, 'Sa_t2m'     , fldptr1=Sa_t2m     , allowNullReturn=.true., rc=rc)
+    !call dshr_state_getfldptr(exportState, 'Sa_wind' , fldptr1=Sa_wind , allowNullReturn=.true., rc=rc)
+    !if (ChkErr(rc,__LINE__,u_FILE_u)) return
+    call dshr_state_getfldptr(exportState, 'Sa_tbot'     , fldptr1=Sa_tbot     , allowNullReturn=.true., rc=rc)
     if (ChkErr(rc,__LINE__,u_FILE_u)) return
     call dshr_state_getfldptr(exportState, 'Sa_tskn'    , fldptr1=Sa_tskn    , allowNullReturn=.true., rc=rc)
     if (ChkErr(rc,__LINE__,u_FILE_u)) return
-    call dshr_state_getfldptr(exportState, 'Sa_q2m'     , fldptr1=Sa_q2m     , allowNullReturn=.true., rc=rc)
+    call dshr_state_getfldptr(exportState, 'Sa_shum'     , fldptr1=Sa_shum     , allowNullReturn=.true., rc=rc)
     if (ChkErr(rc,__LINE__,u_FILE_u)) return
     call dshr_state_getfldptr(exportState, 'Sa_pslv'    , fldptr1=Sa_pslv    , allowNullReturn=.true., rc=rc)
     if (ChkErr(rc,__LINE__,u_FILE_u)) return
@@ -225,8 +227,8 @@ contains
     if (first_time) then
        call ESMF_VMGetCurrent(vm, rc=rc)
        ! determine t2max (see below for use)
-       if (associated(Sa_t2m)) then
-         rtmp(1) = maxval(Sa_t2m(:))
+       if (associated(Sa_tbot)) then
+         rtmp(1) = maxval(Sa_tbot(:))
 
          call ESMF_VMAllReduce(vm, rtmp, rtmp(2:), 1, ESMF_REDUCE_MAX, rc=rc)
          t2max = rtmp(2)
@@ -251,18 +253,18 @@ contains
        end if
 
        !--- calculate wind speed ---
-       if (associated(Sa_wspd10m)) then
-         Sa_wspd10m(n) = sqrt(Sa_u10m(n)*Sa_u10m(n)+Sa_v10m(n)*Sa_v10m(n))
+       if (associated(strm_wind)) then
+         strm_wind(n) = sqrt(Sa_u(n)*Sa_u(n)+Sa_v(n)*Sa_v(n))
        end if
 
        !--- specific humidity at 2m ---
-       if (associated(Sa_t2m) .and. associated(Sa_pslv) .and. associated(Sa_q2m)) then
-         t2 = Sa_t2m(n)
+       if (associated(Sa_tbot) .and. associated(Sa_pslv) .and. associated(Sa_shum)) then
+         t2 = Sa_tbot(n)
          pslv = Sa_pslv(n)
          if (td2max < 50.0_r8) strm_tdew(n) = strm_tdew(n) + tkFrz
          e = datm_eSat(strm_tdew(n), t2)
          qsat = (0.622_r8 * e)/(pslv - 0.378_r8 * e)
-         Sa_q2m(n) = qsat
+         Sa_shum(n) = qsat
        end if
     end do
 
