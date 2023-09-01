@@ -22,6 +22,12 @@
       <value datm_mode="CLMCRUNCEPv7">
         CLMCRUNCEPv7.Solar,CLMCRUNCEPv7.Precip,CLMCRUNCEPv7.TPQW
       </value>
+      <value datm_mode="CLMpi6hGSWP3">
+        CLMpi6hGSWP3.Solar,CLMpi6hGSWP3.Precip,CLMpi6hGSWP3.TPQW
+      </value>
+      <value datm_mode="CLM6hGSWP3">
+        CLM6hGSWP3.Solar,CLM6hGSWP3.Precip,CLM6hGSWP3.TPQW
+      </value>
       <value datm_mode="CLMGSWP3v1">
         CLMGSWP3v1.Solar,CLMGSWP3v1.Precip,CLMGSWP3v1.TPQW
       </value>

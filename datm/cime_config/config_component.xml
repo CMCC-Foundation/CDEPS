@@ -10,7 +10,7 @@
        This file may have atm desc entries.
   -->
   <description modifier_mode="1">
-    <desc atm="DATM[%QIA][%WISOQIA][%CRU][%CRUv7][%GSWP3v1][%MOSARTTEST][%NLDAS2][%CPLHIST][%1PT][%NYF][%IAF][%JRA][%JRA-1p4-2018][%JRA-RYF8485][%JRA-RYF9091][%JRA-RYF0304][%ERA5]"> Data driven ATM </desc>
+    <desc atm="DATM[%QIA][%WISOQIA][%CRU][%CRUv7][%GSWP3v1][%MOSARTTEST][%NLDAS2][%CPLHIST][%1PT][%NYF][%IAF][%JRA][%JRA-1p4-2018][%JRA-RYF8485][%JRA-RYF9091][%JRA-RYF0304][%ERA5][%pi6hGSWP3][%6hGSWP3]"> Data driven ATM </desc>
     <desc option="QIA"> QIAN data set </desc>
     <desc option="WISOQIA">QIAN with water isotopes</desc>
     <desc option="CRU"> CRUNCEP data set </desc>
@@ -27,6 +27,8 @@
     <desc option="JRA-RYF9091"> JRA55 Repeat Year Forcing v1.3 1990-1991</desc>
     <desc option="JRA-RYF0304"> JRA55 Repeat Year Forcing v1.3 2003-2004</desc>
     <desc option="ERA5">ERA5 interannual forcing</desc>
+    <desc option="pi6hGSWP3">GSWP3 data set with 6-hourly data, 1901-1930 climatology to simulate 1850</desc>
+    <desc option="6hGSWP3">GSWP3 data set with 6-hourly data</desc>
   </description>
 
   <entry id="COMP_ATM">
@@ -40,7 +42,7 @@
 
   <entry id="DATM_MODE">
     <type>char</type>
-    <valid_values>CORE2_NYF,CORE2_IAF,CLM_QIAN,CLM_QIAN_WISO,1PT,CLMCRUNCEP,CLMCRUNCEPv7,CLMGSWP3v1,CLMNLDAS2,CPLHIST,CORE_IAF_JRA,CORE_IAF_JRA_1p4_2018,ERA5</valid_values>
+    <valid_values>CORE2_NYF,CORE2_IAF,CLM_QIAN,CLM_QIAN_WISO,1PT,CLMCRUNCEP,CLMCRUNCEPv7,CLMGSWP3v1,CLMNLDAS2,CPLHIST,CORE_IAF_JRA,CORE_IAF_JRA_1p4_2018,ERA5,CLM6hGSWP3,CLMpi6hGSWP3</valid_values>
     <default_value>CORE2_NYF</default_value>
     <group>run_component_datm</group>
     <file>env_run.xml</file>
@@ -61,6 +63,8 @@
       <value compset="DATM%1PT">1PT</value>
       <value compset="DATM%ERA5">ERA5</value>
       <value compset="DATM%CPLHIST">CPLHIST</value>
+      <value compset="DATM%pi6hGSWP3">CLMpi6hGSWP3</value>
+      <value compset="DATM%6hGSWP3">CLM6hGSWP3</value>
     </values>
   </entry>
 
@@ -214,16 +218,22 @@
       <value compset="2000.*_DATM%1PT">$DATM_YR_START</value>
       <value compset="1850.*_DATM%QIA">1</value>
       <value compset="1850.*_DATM%CRU">1</value>
+      <value compset="1850.*_DATM%pi6hGSWP3">1850</value>
       <value compset="1850.*_DATM%GSW">1</value>
       <value compset="HIST.*_DATM%QIA">1895</value>
       <value compset="HIST.*_DATM%CRU">1901</value>
+      <value compset="HIST.*_DATM%6hGSWP3">1901</value>
+      <value compset="HIST.*_DATM%pi6hGSWP3">1850</value>
       <value compset="HIST.*_DATM%GSW">1901</value>
       <value compset="HIST.*_DATM%NLDAS2">$DATM_YR_START</value>
       <value compset="20TR.*_DATM%QIA">1895</value>
       <value compset="20TR.*_DATM%CRU">1901</value>
+      <value compset="20TR.*_DATM%pi6hGSWP3">1850</value>
+      <value compset="20TR.*_DATM%6hGSWP3">1901</value>
       <value compset="20TR.*_DATM%GSW">1901</value>
       <value compset="SSP.*_DATM%QIA">$DATM_YR_START</value>
       <value compset="SSP.*_DATM%CRU">$DATM_YR_START</value>
+      <value compset="SSP.*_DATM%6hGSWP3">$DATM_YR_START</value>
       <value compset="SSP.*_DATM%GSW">$DATM_YR_START</value>
       <value compset="1850.*_DATM%CRU">1</value>
       <value compset="1850.*_DATM%GSW">1</value>
@@ -260,21 +270,27 @@
       <value compset="2000.*_DATM%1PT" grid="1x1_urbanc_alpha" >1</value>
       <value compset="1850.*_DATM%QIA">1948</value>
       <value compset="1850.*_DATM%CRU">1901</value>
+      <value compset="1850.*_DATM%pi6hGSWP3">1850</value>
       <value compset="1850.*_DATM%GSW">1901</value>
       <value compset="1850.*_DATM%NLDAS2">0</value>  <!-- Unsupported -->
       <value compset="2000.*_DATM%WISOQIA">2000</value>
       <value compset="2000.*_DATM%QIA">1972</value>
       <value compset="HIST.*_DATM%QIA">1948</value>
       <value compset="HIST.*_DATM%CRU">1901</value>
+      <value compset="HIST.*_DATM%6hGSWP3">1901</value>
+      <value compset="HIST.*_DATM%pi6hGSWP3">1850</value>
       <value compset="HIST.*_DATM%GSW">1901</value>
       <value compset="HIST.*_DATM%NLDAS2">0</value>  <!-- Unsupported -->
       <value compset="20TR.*_DATM%QIA">1948</value>
       <value compset="20TR.*_DATM%CRU">1901</value>
+      <value compset="20TR.*_DATM%pi6hGSWP3">1850</value>
+      <value compset="20TR.*_DATM%6hGSWP3">1901</value>
       <value compset="20TR.*_DATM%GSW">1901</value>
       <value compset="20TR.*_DATM%NLDAS2">0</value>  <!-- Unsupported -->
       <value compset="4804.*_DATM%QIA">1948</value>
       <value compset="SSP.*_DATM%QIA" >1995</value>
       <value compset="SSP.*_DATM%CRU" >2001</value>
+      <value compset="SSP.*_DATM%6hGSWP3" >2015</value>
       <value compset="SSP.*_DATM%GSW" >2001</value>
       <value compset="2003.*_DATM%QIA.*_TEST">2002</value>
       <value compset="1850.*_DATM%CRU">1901</value>
@@ -305,21 +321,27 @@
       <value   compset="2000.*_DATM%1PT" grid="1x1_urbanc_alpha" >2</value>
       <value   compset="1850.*_DATM%QIA">1972</value>
       <value   compset="1850.*_DATM%CRU">1920</value>
+      <value   compset="1850.*_DATM%pi6hGSWP3">1850</value>
       <value   compset="1850.*_DATM%GSW">1920</value>
       <value   compset="1850.*_DATM%NLDAS2">-1</value>  <!-- Unsupported -->
       <value   compset="2000.*_DATM%WISOQIA">2004</value>
       <value   compset="2000.*_DATM%QIA">2004</value>
       <value   compset="HIST.*_DATM%QIA">1972</value>
       <value   compset="HIST.*_DATM%CRU">1920</value>
+      <value   compset="HIST.*_DATM%pi6hGSWP3">1850</value>
+      <value   compset="HIST.*_DATM%6hGSWP3">2014</value>
       <value   compset="HIST.*_DATM%GSW">1920</value>
       <value   compset="HIST.*_DATM%NLDAS2">-1</value>  <!-- Unsupported -->
       <value   compset="20TR.*_DATM%QIA">1972</value>
       <value   compset="20TR.*_DATM%CRU">1920</value>
+      <value   compset="20TR.*_DATM%pi6hGSWP3">1850</value>
+      <value   compset="20TR.*_DATM%6hGSWP3">2014</value>
       <value   compset="20TR.*_DATM%GSW">1920</value>
       <value   compset="20TR.*_DATM%NLDAS2">-1</value>  <!-- Unsupported -->
       <value   compset="4804.*_DATM%QIA">2004</value>
       <value   compset="SSP.*_DATM%QIA">2004</value>
       <value   compset="SSP.*_DATM%CRU">2016</value>
+      <value   compset="SSP.*_DATM%6hGSWP3">2100</value>
       <value   compset="SSP.*_DATM%GSW">2014</value>
       <value   compset="2003.*_DATM%QIA.*_TEST">2003</value>
       <value   compset="1850.*_DATM%CRU">1920</value>

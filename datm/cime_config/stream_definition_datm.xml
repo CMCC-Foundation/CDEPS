@@ -72,6 +72,20 @@
   CLMCRUNCEPv7.TPQW
 
   ========================
+  datm_mode CLMpi6hGSWP3: (DATM%pi6hGSWP3 in env_run.xml)
+  ========================
+  CLMpi6hGSWP3.Solar
+  CLMpi6hGSWP3.Precip
+  CLMpi6hGSWP3.TPQW
+
+  ========================
+  datm_mode CLM6hGSWP3: (DATM%6hGSWP3 in env_run.xml)
+  ========================
+  CLM6hGSWP3.Solar
+  CLM6hGSWP3.Precip
+  CLM6hGSWP3.TPQW
+
+  ========================
   datm_mode CLMNLDAS2: (DATM%NLDAS2 in env_run.xml)
   ========================
   CLMNLDAS2.Solar
@@ -440,6 +454,206 @@
     </stream_meshfile>
     <stream_datafiles>
       <file first_year="1901" last_year="2016">$DIN_LOC_ROOT_CLMFORC/atm_forcing.datm7.cruncep_qianFill.0.5d.v7.c160715/TPHWL6Hrly/clmforc.cruncep.V7.c2016.0.5d.TPQWL.%ym.nc</file>
+    </stream_datafiles>
+    <stream_datavars>
+      <var>TBOT     Sa_tbot</var>
+      <var>WIND     Sa_wind</var>
+      <var>QBOT     Sa_shum</var>
+      <var>PSRF     Sa_pbot</var>
+    </stream_datavars>
+    <stream_lev_dimname>null</stream_lev_dimname>
+    <stream_mapalgo>
+      <mapalgo>bilinear</mapalgo>
+    </stream_mapalgo>
+    <stream_vectors>null</stream_vectors>
+    <stream_year_align>$DATM_YR_ALIGN</stream_year_align>
+    <stream_year_first>$DATM_YR_START</stream_year_first>
+    <stream_year_last>$DATM_YR_END</stream_year_last>
+    <stream_offset>0</stream_offset>
+    <stream_tintalgo>
+      <tintalgo>linear</tintalgo>
+    </stream_tintalgo>
+    <stream_taxmode>
+      <taxmode>cycle</taxmode>
+    </stream_taxmode>
+    <stream_dtlimit>
+      <dtlimit>1.5</dtlimit>
+    </stream_dtlimit>
+    <stream_readmode>single</stream_readmode>
+  </stream_entry>
+
+  <!-- ===================================  -->
+  <!-- datm_mode CLMpi6hGSWP3            -->
+  <!-- ===================================  -->
+
+  <stream_entry name="CLMpi6hGSWP3.Solar">
+    <stream_meshfile>
+      <meshfile>$DIN_LOC_ROOT/atm/datm7/atm_forcing.datm7.GSWP3.0.5d.v1.c170516/clmforc.GSWP3.c2011.0.5x0.5.TPQWL.SCRIP.210520_ESMFmesh.nc</meshfile>
+    </stream_meshfile>
+    <stream_datafiles>
+      <file first_year="1850" last_year="1850">$DIN_LOC_ROOT_CLMFORC/atm_forcing.datm7.gswp3.0.5d.c180724/clima_1850-1900/clmforc.gswp3.0.5d.Solr.%ym.nc</file>
+    </stream_datafiles>
+    <stream_datavars>
+      <var>FSDS     Faxa_swdn</var>
+    </stream_datavars>
+    <stream_lev_dimname>null</stream_lev_dimname>
+    <stream_mapalgo>
+      <mapalgo>bilinear</mapalgo>
+    </stream_mapalgo>
+    <stream_vectors>null</stream_vectors>
+    <stream_year_align>$DATM_YR_ALIGN</stream_year_align>
+    <stream_year_first>$DATM_YR_START</stream_year_first>
+    <stream_year_last>$DATM_YR_END</stream_year_last>
+    <stream_offset>0</stream_offset>
+    <stream_tintalgo>
+      <tintalgo>coszen</tintalgo>
+    </stream_tintalgo>
+    <stream_taxmode>
+      <taxmode>cycle</taxmode>
+    </stream_taxmode>
+    <stream_dtlimit>
+      <dtlimit>1.5</dtlimit>
+    </stream_dtlimit>
+    <stream_readmode>single</stream_readmode>
+  </stream_entry>
+
+  <stream_entry name="CLMpi6hGSWP3.Precip">
+    <stream_meshfile>
+      <meshfile>$DIN_LOC_ROOT/atm/datm7/atm_forcing.datm7.GSWP3.0.5d.v1.c170516/clmforc.GSWP3.c2011.0.5x0.5.TPQWL.SCRIP.210520_ESMFmesh.nc</meshfile>
+    </stream_meshfile>
+    <stream_datafiles>
+      <file first_year="1850" last_year="1850">$DIN_LOC_ROOT_CLMFORC/atm_forcing.datm7.gswp3.0.5d.c180724/clima_1850-1900/clmforc.gswp3.0.5d.Prec.%ym.nc</file>
+    </stream_datafiles>
+    <stream_datavars>
+      <var>PRECTmms Faxa_precn</var>
+    </stream_datavars>
+    <stream_lev_dimname>null</stream_lev_dimname>
+    <stream_mapalgo>
+      <mapalgo>bilinear</mapalgo>
+    </stream_mapalgo>
+    <stream_vectors>null</stream_vectors>
+    <stream_year_align>$DATM_YR_ALIGN</stream_year_align>
+    <stream_year_first>$DATM_YR_START</stream_year_first>
+    <stream_year_last>$DATM_YR_END</stream_year_last>
+    <stream_offset>0</stream_offset>
+    <stream_tintalgo>
+      <tintalgo>nearest</tintalgo>
+    </stream_tintalgo>
+    <stream_taxmode>
+      <taxmode>cycle</taxmode>
+    </stream_taxmode>
+    <stream_dtlimit>
+      <dtlimit>1.5</dtlimit>
+    </stream_dtlimit>
+    <stream_readmode>single</stream_readmode>
+  </stream_entry>
+
+  <stream_entry name="CLMpi6hGSWP3.TPQW">
+    <stream_meshfile>
+      <meshfile>$DIN_LOC_ROOT/atm/datm7/atm_forcing.datm7.GSWP3.0.5d.v1.c170516/clmforc.GSWP3.c2011.0.5x0.5.TPQWL.SCRIP.210520_ESMFmesh.nc</meshfile>
+    </stream_meshfile>
+    <stream_datafiles>
+      <file first_year="1850" last_year="1850">$DIN_LOC_ROOT_CLMFORC/atm_forcing.datm7.gswp3.0.5d.c180724/clima_1850-1900/clmforc.gswp3.0.5d.TPQWL.%ym.nc</file>
+    </stream_datafiles>
+    <stream_datavars>
+      <var>TBOT     Sa_tbot</var>
+      <var>WIND     Sa_wind</var>
+      <var>QBOT     Sa_shum</var>
+      <var>PSRF     Sa_pbot</var>
+    </stream_datavars>
+    <stream_lev_dimname>null</stream_lev_dimname>
+    <stream_mapalgo>
+      <mapalgo>bilinear</mapalgo>
+    </stream_mapalgo>
+    <stream_vectors>null</stream_vectors>
+    <stream_year_align>$DATM_YR_ALIGN</stream_year_align>
+    <stream_year_first>$DATM_YR_START</stream_year_first>
+    <stream_year_last>$DATM_YR_END</stream_year_last>
+    <stream_offset>0</stream_offset>
+    <stream_tintalgo>
+      <tintalgo>linear</tintalgo>
+    </stream_tintalgo>
+    <stream_taxmode>
+      <taxmode>cycle</taxmode>
+    </stream_taxmode>
+    <stream_dtlimit>
+      <dtlimit>1.5</dtlimit>
+    </stream_dtlimit>
+    <stream_readmode>single</stream_readmode>
+  </stream_entry>
+
+  <!-- ===================================  -->
+  <!-- datm_mode CLM6hGSWP3                 -->
+  <!-- ===================================  -->
+
+  <stream_entry name="CLM6hGSWP3.Solar">
+    <stream_meshfile>
+      <meshfile>$DIN_LOC_ROOT/atm/datm7/atm_forcing.datm7.GSWP3.0.5d.v1.c170516/clmforc.GSWP3.c2011.0.5x0.5.TPQWL.SCRIP.210520_ESMFmesh.nc</meshfile>
+    </stream_meshfile>
+    <stream_datafiles>
+      <file first_year="1901" last_year="2014">$DIN_LOC_ROOT_CLMFORC/atm_forcing.datm7.gswp3.0.5d.c180724/Solar6Hrly/clmforc.gswp3.0.5d.Solr.%ym.nc</file>
+    </stream_datafiles>
+    <stream_datavars>
+      <var>FSDS     Faxa_swdn</var>
+    </stream_datavars>
+    <stream_lev_dimname>null</stream_lev_dimname>
+    <stream_mapalgo>
+      <mapalgo>bilinear</mapalgo>
+    </stream_mapalgo>
+    <stream_vectors>null</stream_vectors>
+    <stream_year_align>$DATM_YR_ALIGN</stream_year_align>
+    <stream_year_first>$DATM_YR_START</stream_year_first>
+    <stream_year_last>$DATM_YR_END</stream_year_last>
+    <stream_offset>0</stream_offset>
+    <stream_tintalgo>
+      <tintalgo>coszen</tintalgo>
+    </stream_tintalgo>
+    <stream_taxmode>
+      <taxmode>cycle</taxmode>
+    </stream_taxmode>
+    <stream_dtlimit>
+      <dtlimit>1.5</dtlimit>
+    </stream_dtlimit>
+    <stream_readmode>single</stream_readmode>
+  </stream_entry>
+
+  <stream_entry name="CLM6hGSWP3.Precip">
+    <stream_meshfile>
+      <meshfile>$DIN_LOC_ROOT/atm/datm7/atm_forcing.datm7.GSWP3.0.5d.v1.c170516/clmforc.GSWP3.c2011.0.5x0.5.TPQWL.SCRIP.210520_ESMFmesh.nc</meshfile>
+    </stream_meshfile>
+    <stream_datafiles>
+      <file first_year="1901" last_year="2014">$DIN_LOC_ROOT_CLMFORC/atm_forcing.datm7.gswp3.0.5d.c180724/Precip6Hrly/clmforc.gswp3.0.5d.Prec.%ym.nc</file>
+    </stream_datafiles>
+    <stream_datavars>
+      <var>PRECTmms Faxa_precn</var>
+    </stream_datavars>
+    <stream_lev_dimname>null</stream_lev_dimname>
+    <stream_mapalgo>
+      <mapalgo>bilinear</mapalgo>
+    </stream_mapalgo>
+    <stream_vectors>null</stream_vectors>
+    <stream_year_align>$DATM_YR_ALIGN</stream_year_align>
+    <stream_year_first>$DATM_YR_START</stream_year_first>
+    <stream_year_last>$DATM_YR_END</stream_year_last>
+    <stream_offset>0</stream_offset>
+    <stream_tintalgo>
+      <tintalgo>nearest</tintalgo>
+    </stream_tintalgo>
+    <stream_taxmode>
+      <taxmode>cycle</taxmode>
+    </stream_taxmode>
+    <stream_dtlimit>
+      <dtlimit>1.5</dtlimit>
+    </stream_dtlimit>
+    <stream_readmode>single</stream_readmode>
+  </stream_entry>
+
+  <stream_entry name="CLM6hGSWP3.TPQW">
+    <stream_meshfile>
+      <meshfile>$DIN_LOC_ROOT/atm/datm7/atm_forcing.datm7.GSWP3.0.5d.v1.c170516/clmforc.GSWP3.c2011.0.5x0.5.TPQWL.SCRIP.210520_ESMFmesh.nc</meshfile>
+    </stream_meshfile>
+    <stream_datafiles>
+      <file first_year="1901" last_year="2014">$DIN_LOC_ROOT_CLMFORC/atm_forcing.datm7.gswp3.0.5d.c180724/TPHWL6Hrly/clmforc.gswp3.0.5d.TPQWL.%ym.nc</file>
     </stream_datafiles>
     <stream_datavars>
       <var>TBOT     Sa_tbot</var>
